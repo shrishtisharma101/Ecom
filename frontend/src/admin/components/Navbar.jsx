@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { clearAdminSession } from "../utils/adminAuth";
 
-const NOTIFICATIONS_URL = "http://localhost:8000/api/orders/admin-notifications";
+const NOTIFICATIONS_URL = `${import.meta.env.VITE_API_URL}/orders/admin-notifications`;
 
 const Navbar = ({ setIsOpen }) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);

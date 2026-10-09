@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useShop } from "../../context/useShop";
 import { formatINR } from "../../utils/currency";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = `${import.meta.env.VITE_API_URL}`;
 const paymentMethods = [
   { id: "UPI", label: "UPI", icon: FaQrcode },
   { id: "Netbanking", label: "Netbanking", icon: FaUniversity },

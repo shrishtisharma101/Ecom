@@ -5,7 +5,7 @@ import TablePagination from "../components/TablePagination";
 import { useTablePagination } from "../hooks/useTablePagination";
 // import AdminPageHeader from "../components/AdminPageHeader";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = `${import.meta.env.VITE_API_URL}`;
 const getLocalDateKey = (date) => {
   const value = new Date(date);
   return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, "0")}-${String(value.getDate()).padStart(2, "0")}`;

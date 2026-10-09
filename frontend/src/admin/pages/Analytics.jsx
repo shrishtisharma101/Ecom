@@ -11,7 +11,8 @@ import { formatINR } from "../../utils/currency";
 import { getAdminDateRange, useAdminDateFilter } from "../context/AdminDateFilterContext";
 // import AdminPageHeader from "../components/AdminPageHeader";
 
-const API_URL = "http://localhost:8000/api";
+
+const API_URL = import.meta.env.VITE_API_URL;
 const formatDayKey = (date) => {
   const value = new Date(date);
   return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, "0")}-${String(value.getDate()).padStart(2, "0")}`;
@@ -234,6 +235,8 @@ const Analytics = () => {
       /> */}
 
       {errorMessage && <p role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errorMessage}</p>}
+
+
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((card) => (

@@ -7,7 +7,7 @@ import TablePagination from "../components/TablePagination";
 import { useTablePagination } from "../hooks/useTablePagination";
 // import AdminPageHeader from "../components/AdminPageHeader";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = `${import.meta.env.VITE_API_URL}`;
 const formatDate = (date) => new Date(date).toLocaleString();
 const localDateKey = (date) => {
   const value = new Date(date);
@@ -65,7 +65,7 @@ const Dashboard = () => {
   const { refreshVersion } = dateFilter;
   const { start: rangeStart, end: rangeEnd } = getAdminDateRange(dateFilter);
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [ setErrorMessage] = useState("");
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
   const [contacts, setContacts] = useState([]);

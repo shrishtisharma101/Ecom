@@ -93,7 +93,7 @@ const MainNavbar = ({ toggleMenu }) => {
 
     try {
       const response = await axios.put(
-        "http://localhost:8000/api/users/profile-image",
+        `${import.meta.env.VITE_API_URL}/users/profile-image`,
         imageData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

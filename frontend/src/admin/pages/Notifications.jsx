@@ -6,7 +6,7 @@ import TablePagination from "../components/TablePagination";
 import { useTablePagination } from "../hooks/useTablePagination";
 import { useAdminDateFilter } from "../context/AdminDateFilterContext";
 
-const API_URL = "http://localhost:8000/api/orders/admin-notifications";
+const API_URL = `${import.meta.env.VITE_API_URL}/orders/admin-notifications`;
 const formatDate = (date) => new Date(date).toLocaleString("en-IN");
 
 const Notifications = () => {

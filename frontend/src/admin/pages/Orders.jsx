@@ -5,7 +5,7 @@ import TablePagination from "../components/TablePagination";
 import { useTablePagination } from "../hooks/useTablePagination";
 // import AdminPageHeader from "../components/AdminPageHeader";
 
-const API_URL = "http://localhost:8000/api/orders";
+const API_URL = `${import.meta.env.VITE_API_URL}/orders`;
 const formatDate = (date) => new Date(date).toLocaleString();
 
 const Orders = () => {

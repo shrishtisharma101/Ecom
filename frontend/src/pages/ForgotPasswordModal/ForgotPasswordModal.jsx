@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import {
   FaEnvelope,
@@ -35,6 +35,14 @@ const ForgotPasswordModal = ({
   const modalRef = useRef(null);
   const scrollbarWidth = useRef(0);
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  }, [onClose]);
+
   // ==================================================
   // CALCULATE SCROLLBAR WIDTH
   // ==================================================
@@ -51,24 +59,27 @@ const ForgotPasswordModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      requestAnimationFrame(() => {
+      const animationFrame = requestAnimationFrame(() => {
         setIsVisible(true);
+        setStep("email");
+        setEmail("");
+        setOtp("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setError("");
+        setIsLoading(false);
       });
 
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight =
         `${scrollbarWidth.current}px`;
 
-      setStep("email");
-      setEmail("");
-      setOtp("");
-      setNewPassword("");
-      setConfirmPassword("");
-      setError("");
-      setIsLoading(false);
+      return () => {
+        cancelAnimationFrame(animationFrame);
+        document.body.style.overflow = "unset";
+        document.body.style.paddingRight = "0px";
+      };
     } else {
-      setIsVisible(false);
-
       document.body.style.overflow = "unset";
       document.body.style.paddingRight = "0px";
     }
@@ -95,7 +106,7 @@ const ForgotPasswordModal = ({
     return () => {
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   // ==================================================
   // CLOSE WHEN CLICKING OUTSIDE
@@ -124,19 +135,11 @@ const ForgotPasswordModal = ({
         handleClickOutside
       );
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   // ==================================================
   // CLOSE MODAL
   // ==================================================
-
-  const handleClose = () => {
-    setIsVisible(false);
-
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
 
   // ==================================================
   // SEND OTP
@@ -155,7 +158,7 @@ const ForgotPasswordModal = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/forgot-password",
+        `${import.meta.env.VITE_API_URL}/users/forgot-password`,
         {
           email: email.trim(),
         }
@@ -211,7 +214,7 @@ const ForgotPasswordModal = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/verify-otp",
+        `${import.meta.env.VITE_API_URL}/users/verify-otp`,
         {
           email: email.trim(),
           otp: otp.trim(),
@@ -275,7 +278,7 @@ const ForgotPasswordModal = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/reset-password",
+        `${import.meta.env.VITE_API_URL}/users/reset-password`,
         {
           email: email.trim(),
           otp: otp.trim(),
@@ -819,7 +822,7 @@ const ForgotPasswordModal = ({
 
                 try {
                   await axios.post(
-                    "http://localhost:8000/api/users/forgot-password",
+                    `${import.meta.env.VITE_API_URL}/users/forgot-password`,
                     {
                       email: email.trim(),
                     }

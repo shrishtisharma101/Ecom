@@ -4,7 +4,7 @@ import { FaCheckCircle, FaLock } from "react-icons/fa";
 import { useShop } from "../../context/useShop";
 import { formatINR } from "../../utils/currency";
 
-const API_URL = "http://localhost:8000/api/orders";
+const API_URL = `${import.meta.env.VITE_API_URL}/orders`;
 
 const DemoPaymentPage = () => {
   const [searchParams] = useSearchParams();

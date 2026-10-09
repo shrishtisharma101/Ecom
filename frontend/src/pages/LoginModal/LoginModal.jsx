@@ -86,7 +86,7 @@ const LoginModal = ({
 
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/users/login",
+      `${import.meta.env.VITE_API_URL}/users/login`,
       {
         email: email,
         password: password,

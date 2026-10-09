@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { formatINR } from "../../utils/currency";
 
-const API_URL = "http://localhost:8000/api/orders";
+const API_URL = `${import.meta.env.VITE_API_URL}/orders`;
 const formatDate = (date) => new Date(date).toLocaleString();
 
 const OrdersPage = () => {
